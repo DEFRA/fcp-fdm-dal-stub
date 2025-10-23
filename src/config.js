@@ -80,6 +80,12 @@ const config = convict({
     default: null,
     env: 'HTTP_PROXY'
   },
+  isSecureContextEnabled: {
+    doc: 'Enable Secure Context',
+    format: Boolean,
+    default: isProduction,
+    env: 'ENABLE_SECURE_CONTEXT'
+  },
   isMetricsEnabled: {
     doc: 'Enable metrics reporting',
     format: Boolean,
@@ -92,6 +98,44 @@ const config = convict({
       format: String,
       default: 'x-cdp-request-id',
       env: 'TRACING_HEADER'
+    }
+  },
+  data: {
+    globalTtl: {
+      doc: 'Globally override TTL for all data in seconds',
+      format: Number,
+      nullable: true,
+      default: null,
+      env: 'DATA_GLOBAL_TTL'
+    }
+  },
+  auth: {
+    enabled: {
+      doc: 'Whether Entra authentication is required for downstream Farming Data Model API',
+      format: Boolean,
+      default: true,
+      env: 'AUTH_ENABLED'
+    },
+    tenant: {
+      doc: 'Azure tenant ID to authenticate clients',
+      format: String,
+      default: null,
+      nullable: true,
+      env: 'AUTH_TENANT_ID'
+    },
+    clientId: {
+      doc: 'Azure AD Client ID',
+      format: String,
+      default: null,
+      nullable: true,
+      env: 'AUTH_CLIENT_ID'
+    },
+    clientSecret: {
+      doc: 'Azure AD Client Secret',
+      format: String,
+      default: null,
+      nullable: true,
+      env: 'AUTH_CLIENT_SECRET'
     }
   }
 })

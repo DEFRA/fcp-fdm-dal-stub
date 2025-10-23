@@ -1,0 +1,3 @@
+services:
+  fcp-fdm-dal-stub:
+    command: npm run test:watch

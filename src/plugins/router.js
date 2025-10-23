@@ -4,7 +4,11 @@ const router = {
   plugin: {
     name: 'router',
     register: (server, _options) => {
-      server.route([health])
+      server.route(
+        [].concat(
+          health
+        )
+      )
     }
   }
 }
