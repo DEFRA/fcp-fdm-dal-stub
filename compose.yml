@@ -55,7 +55,7 @@ services:
   #   networks:
   #     - cdp-tenant
 
-  cdp-node-backend-template:
+  fcp-fdm-dal-stub:
     build:
       context: .
       target: development
