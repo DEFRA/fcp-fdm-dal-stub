@@ -1,7 +1,7 @@
 type Message {
   correlationId: String!
-  crn: Int!
-  sbi: Int!
+  crn: BigInt
+  sbi: Int
   recipient: String
   subject: String
   body: String
@@ -12,7 +12,46 @@ type Message {
 }
 
 type Event {
+  specversion: String!
   type: String!
+  source: String!
+  id: String!
+  time: String!  
+  subject: String
+  datacontenttype: String  
+  data: EventData
+}
+
+type EventData {
+  correlationId: String!
+  recipient: String!
+  statusDetails: StatusDetails
+  content: EventContent  
+  crn: BigInt
+  sbi: Int
+  sourceSystem: String
+  notifyTemplateId: String
+  commsType: String
+  personalisation: String
+  reference: String
+  oneClickUnsubscribeUrl: String
+  emailReplyToId: String
+}
+
+type StatusDetails {
+  status: String!
+  errorCode: Int
+  errors: [EventError!]
+}
+
+type EventError {
+  error: String!
+  message: String!
+}
+
+type EventContent {
+  subject: String
+  body: String
 }
 
 enum MessageStatus {
@@ -35,7 +74,7 @@ type MessageResponse {
 }
 
 input MessageFilters {
-  crn: Int
+  crn: BigInt
   sbi: Int
   includeContent: Boolean
   includeEvents: Boolean
