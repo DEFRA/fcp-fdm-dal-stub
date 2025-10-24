@@ -100,13 +100,12 @@ const config = convict({
       env: 'TRACING_HEADER'
     }
   },
-  data: {
-    globalTtl: {
-      doc: 'Globally override TTL for all data in seconds',
-      format: Number,
-      nullable: true,
+  fdm: {
+    endpoint: {
+      doc: 'FDM REST API endpoint',
+      format: String,
       default: null,
-      env: 'DATA_GLOBAL_TTL'
+      env: 'FDM_ENDPOINT'
     }
   },
   auth: {
@@ -121,21 +120,21 @@ const config = convict({
       format: String,
       default: null,
       nullable: true,
-      env: 'AUTH_TENANT_ID'
+      env: 'TENANT_ID'
     },
     clientId: {
       doc: 'Azure AD Client ID',
       format: String,
       default: null,
       nullable: true,
-      env: 'AUTH_CLIENT_ID'
+      env: 'CLIENT_ID'
     },
     clientSecret: {
       doc: 'Azure AD Client Secret',
       format: String,
       default: null,
       nullable: true,
-      env: 'AUTH_CLIENT_SECRET'
+      env: 'CLIENT_SECRET'
     }
   }
 })
