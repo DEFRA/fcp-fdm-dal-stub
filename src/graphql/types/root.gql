@@ -1,0 +1,12 @@
+type Query {
+  # Get all messages with optional filtering
+  messages(filters: MessageFilters): MessagesResponse!
+  
+  # Get a specific message by correlation ID
+  message(correlationId: String!, includeContent: Boolean, includeEvents: Boolean): MessageResponse!
+  
+  # Health check
+  health: String!
+}
+
+scalar BigInt

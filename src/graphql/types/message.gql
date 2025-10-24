@@ -1,0 +1,42 @@
+type Message {
+  correlationId: String!
+  crn: Int!
+  sbi: Int!
+  recipient: String
+  subject: String
+  body: String
+  status: MessageStatus!
+  created: String!
+  lastUpdated: String!
+  events: [Event!]
+}
+
+type Event {
+  type: String!
+}
+
+enum MessageStatus {
+  RECEIVED
+  FAILURE_VALIDATION
+  SENDING
+  DELIVERED
+  FAILURE_PROVIDER
+  FAILURE_INTERNAL
+  RETRY
+  RETRY_EXPIRED
+}
+
+type MessagesResponse {
+  messages: [Message!]!
+}
+
+type MessageResponse {
+  message: Message
+}
+
+input MessageFilters {
+  crn: Int
+  sbi: Int
+  includeContent: Boolean
+  includeEvents: Boolean
+}
