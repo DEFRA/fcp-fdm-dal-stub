@@ -10,9 +10,13 @@ import { secureContext } from './common/helpers/secure-context/index.js'
 import { pulse } from './common/helpers/pulse.js'
 import { requestTracing } from './common/helpers/request-tracing.js'
 import { setupProxy } from './common/helpers/proxy/setup-proxy.js'
+import { apollo } from './plugins/apollo.js'
+import { apolloServer } from './graphql/server.js'
 
 async function createServer () {
   setupProxy()
+  await apolloServer.start()
+
   const server = Hapi.server({
     host: config.get('host'),
     port: config.get('port'),
@@ -47,7 +51,8 @@ async function createServer () {
     secureContext,
     pulse,
     ...swagger,
-    router
+    router,
+    apollo
   ])
 
   return server
