@@ -20,9 +20,10 @@ export async function getMessages (filters = {}) {
   }
 
   const queryString = queryParams.toString()
-  const path = `/messages${queryString ? `?${queryString}` : ''}`
+  const basePath = '/messages'
+  const path = queryString ? `${basePath}?${queryString}` : basePath
 
-  return await get(path)
+  return get(path)
 }
 
 export async function getMessageByCorrelationId (correlationId, filters = {}) {
@@ -41,7 +42,8 @@ export async function getMessageByCorrelationId (correlationId, filters = {}) {
   }
 
   const queryString = queryParams.toString()
-  const path = `/messages/${correlationId}${queryString ? `?${queryString}` : ''}`
+  const basePath = `/messages/${correlationId}`
+  const path = queryString ? `${basePath}?${queryString}` : basePath
 
-  return await get(path)
+  return get(path)
 }

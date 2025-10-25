@@ -1,8 +1,8 @@
+import { join } from 'node:path'
 import { ApolloServer } from '@apollo/server'
 import { loadFilesSync } from '@graphql-tools/load-files'
 import { mergeTypeDefs } from '@graphql-tools/merge'
 import { makeExecutableSchema } from '@graphql-tools/schema'
-import { join } from 'path'
 
 import { resolvers } from './resolvers/index.js'
 
