@@ -1,5 +1,5 @@
 import { GraphQLScalarType, GraphQLError } from 'graphql'
-import { messageResolvers } from './message-resolvers.js'
+import { messageResolvers } from './message.js'
 
 const BigIntType = new GraphQLScalarType({
   name: 'BigInt',

@@ -4,9 +4,7 @@ type Query {
   
   # Get a specific message by correlation ID
   message(correlationId: String!, includeContent: Boolean, includeEvents: Boolean): MessageResponse!
-  
-  # Health check
-  health: String!
+
 }
 
 scalar BigInt
