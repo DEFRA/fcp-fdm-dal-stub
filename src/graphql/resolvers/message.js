@@ -1,40 +1,37 @@
 import { getMessages, getMessageByCorrelationId } from '../sources/messages.js'
 
+function findRequestedFields (selectionSet) {
+  const fields = new Set()
+  if (!selectionSet || !selectionSet.selections) return fields
+  for (const sel of selectionSet.selections) {
+    if (sel.kind === 'Field') {
+      fields.add(sel.name.value)
+      if (sel.selectionSet) {
+        for (const subField of findRequestedFields(sel.selectionSet)) {
+          fields.add(subField)
+        }
+      }
+    }
+  }
+  return fields
+}
+
 export const messageResolvers = {
   Query: {
-    messages: async (parent, { filters }) => {
-      const response = await getMessages(filters)
-      return response.data || response
+    messages: async (parent, { filters }, context, info) => {
+      const fields = findRequestedFields(info.fieldNodes[0].selectionSet)
+      const includeContent = fields.has('subject') || fields.has('body')
+      const includeEvents = fields.has('events') && [...fields].some(f => f !== 'events')
+      const response = await getMessages({ ...filters, includeContent, includeEvents })
+      return response.data.messages
     },
 
-    message: async (parent, { correlationId, includeContent, includeEvents }) => {
-      try {
-        const response = await getMessageByCorrelationId(
-          correlationId,
-          includeContent,
-          includeEvents
-        )
-        return response.data || response
-      } catch (error) {
-        if (error.output?.statusCode === 404) {
-          try {
-            const allMessagesResponse = await getMessages({
-              includeContent,
-              includeEvents
-            })
-
-            if (allMessagesResponse.data && allMessagesResponse.data.messages) {
-              const message = allMessagesResponse.data.messages.find(m => m.correlationId === correlationId)
-              return { message: message || null }
-            }
-
-            return { message: null }
-          } catch (fallbackError) {
-            return { message: null }
-          }
-        }
-        throw error
-      }
+    message: async (parent, { correlationId }, context, info) => {
+      const fields = findRequestedFields(info.fieldNodes[0].selectionSet)
+      const includeContent = fields.has('subject') || fields.has('body')
+      const includeEvents = fields.has('events') && [...fields].some(f => f !== 'events')
+      const response = await getMessageByCorrelationId(correlationId, { includeContent, includeEvents })
+      return response.data.message
     }
   },
 

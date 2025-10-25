@@ -1,10 +1,9 @@
 type Query {
   # Get all messages with optional filtering
-  messages(filters: MessageFilters): MessagesResponse!
-  
-  # Get a specific message by correlation ID
-  message(correlationId: String!, includeContent: Boolean, includeEvents: Boolean): MessageResponse!
+  messages(filters: MessageFilters): [Message!]
 
+  # Get a specific message by correlation ID
+  message(correlationId: String!): Message!
 }
 
 scalar BigInt

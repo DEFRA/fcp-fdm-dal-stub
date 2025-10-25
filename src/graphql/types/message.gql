@@ -65,14 +65,6 @@ enum MessageStatus {
   RETRY_EXPIRED
 }
 
-type MessagesResponse {
-  messages: [Message!]!
-}
-
-type MessageResponse {
-  message: Message
-}
-
 input MessageFilters {
   crn: BigInt
   sbi: Int
