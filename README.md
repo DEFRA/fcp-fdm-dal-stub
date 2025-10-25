@@ -11,7 +11,7 @@ The Farming Data Model (FDM) service is a common component to support data excha
 
 FDM subscribes to events across the FCP ecosystem via an AWS SQS queue. These events are persisted and precompiled into a data model which can be queried via REST API endpoints.
 
-The DAL is intended to be the primary consumer of the FDM service.  This stub is therefore intended to support development of the FDM service in isolation by simulating the behaviour of the DAL.
+The Data Access Layer (DAL) is intended to be the primary consumer of the FDM service.  This stub is therefore intended to support development of the FDM service in isolation by simulating the behaviour of the DAL.
 
 ## Requirements
 
@@ -54,6 +54,94 @@ Tests can also be run in watch mode to support Test Driven Development (TDD):
 ```bash
 npm run docker:test:watch
 ```
+
+## GraphQL API
+
+The DAL stub exposes a GraphQL API following similar principles to the actual DAL using Apollo Server.
+
+When running locally, Apollo explorer can be used to explore and test the GraphQL API once the application is running.  This can be accessed at `http://localhost:3001/graphql`
+
+### Example queries
+
+#### Messages
+
+## Message Schema Examples
+
+### Example 1: Fetching a Message by Correlation ID
+
+#### GraphQL Query
+```graphql
+query GetMessage($correlationId: String!) {
+  message(correlationId: $correlationId) {
+    correlationId
+    created
+    crn
+    events {
+      id
+      source
+      type
+      time
+    }
+    lastUpdated
+    status
+  }
+}
+```
+
+#### Variables
+```json
+{
+  "correlationId": "79389915-7275-457a-b8ca-8bf206b2e67b"
+}
+```
+
+#### cURL Command
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "query GetMessage($correlationId: $correlationId) { message(correlationId: $correlationId) { correlationId created crn events { id source type time } lastUpdated status } }",
+    "variables": { "correlationId": "79389915-7275-457a-b8ca-8bf206b2e67b" }
+  }' \
+  http://localhost:3001/graphql
+```
+
+### Example 2: Fetching All Messages with Filters
+
+#### GraphQL Query
+```graphql
+query GetMessages($filters: MessageFilters) {
+  messages(filters: $filters) {
+    correlationId
+    created
+    crn
+    status
+  }
+}
+```
+
+#### Variables
+```json
+{
+  "filters": {
+    "crn": 1234567890,
+    "sbi": 987654321
+  }
+}
+```
+
+#### cURL Command
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "query GetMessages($filters: $filters) { messages(filters: $filters) { correlationId created crn status } }",
+    "variables": { "filters": { "crn": 1234567890, "sbi": 987654321 } }
+  }' \
+  http://localhost:3001/graphql
+```
+
+> **Note**: Only `crn` and `sbi` are allowed as filters when fetching multiple messages.
 
 ## Licence
 
