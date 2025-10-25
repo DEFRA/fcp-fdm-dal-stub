@@ -19,3 +19,17 @@ export const apolloServer = new ApolloServer({
   introspection: true,
   csrfPrevention: true
 })
+
+export async function start () {
+  if (apolloServer.internals.state.phase !== 'started') {
+    console.log('Starting Apollo Server...')
+    await apolloServer.start()
+  }
+}
+
+export async function stop () {
+  if (apolloServer.internals.state.phase === 'started') {
+    console.log('Stopping Apollo Server...')
+    await apolloServer.stop()
+  }
+}

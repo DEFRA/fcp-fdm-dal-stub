@@ -10,11 +10,11 @@ import { pulse } from './common/helpers/pulse.js'
 import { requestTracing } from './common/helpers/request-tracing.js'
 import { setupProxy } from './common/helpers/proxy/setup-proxy.js'
 import { apollo } from './plugins/apollo.js'
-import { apolloServer } from './graphql/server.js'
+import { start as startApolloServer } from './graphql/server.js'
 
 async function createServer () {
   setupProxy()
-  await apolloServer.start()
+  await startApolloServer()
 
   const server = Hapi.server({
     host: config.get('host'),

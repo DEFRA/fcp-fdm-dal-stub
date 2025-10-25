@@ -38,9 +38,7 @@ describe('startServer', () => {
     process.env.PORT = '3098' // Set to obscure port to avoid conflicts
 
     createServerImport = await import('../../../../src/server.js')
-    startServerImport = await import(
-      '../../../../src/common/helpers/start-server.js'
-    )
+    startServerImport = await import('../../../../src/common/helpers/start-server.js')
 
     createServerSpy = vi.spyOn(createServerImport, 'createServer')
     hapiServerSpy = vi.spyOn(Hapi, 'server')
