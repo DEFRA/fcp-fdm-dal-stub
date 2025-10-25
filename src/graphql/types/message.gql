@@ -5,7 +5,7 @@ type Message {
   recipient: String
   subject: String
   body: String
-  status: MessageStatus!
+  status: String!
   created: String!
   lastUpdated: String!
   events: [Event!]
@@ -52,17 +52,6 @@ type EventError {
 type EventContent {
   subject: String
   body: String
-}
-
-enum MessageStatus {
-  RECEIVED
-  FAILURE_VALIDATION
-  SENDING
-  DELIVERED
-  FAILURE_PROVIDER
-  FAILURE_INTERNAL
-  RETRY
-  RETRY_EXPIRED
 }
 
 input MessageFilters {

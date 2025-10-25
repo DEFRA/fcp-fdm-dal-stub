@@ -33,21 +33,5 @@ export const messageResolvers = {
       const response = await getMessageByCorrelationId(correlationId, { includeContent, includeEvents })
       return response.data.message
     }
-  },
-
-  Message: {
-    status: (parent) => {
-      const statusMap = {
-        received: 'RECEIVED',
-        'failure.validation': 'FAILURE_VALIDATION',
-        sending: 'SENDING',
-        delivered: 'DELIVERED',
-        'failure.provider': 'FAILURE_PROVIDER',
-        'failure.internal': 'FAILURE_INTERNAL',
-        retry: 'RETRY',
-        'retry.expired': 'RETRY_EXPIRED'
-      }
-      return statusMap[parent.status] || parent.status
-    }
   }
 }

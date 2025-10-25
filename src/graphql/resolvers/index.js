@@ -39,8 +39,5 @@ export const resolvers = {
   Query: {
     ...messageResolvers.Query
   },
-  Message: {
-    ...messageResolvers.Message
-  },
   BigInt: BigIntType
 }
