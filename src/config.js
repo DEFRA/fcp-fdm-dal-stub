@@ -80,6 +80,12 @@ const config = convict({
     default: null,
     env: 'HTTP_PROXY'
   },
+  isSecureContextEnabled: {
+    doc: 'Enable Secure Context',
+    format: Boolean,
+    default: isProduction,
+    env: 'ENABLE_SECURE_CONTEXT'
+  },
   isMetricsEnabled: {
     doc: 'Enable metrics reporting',
     format: Boolean,
@@ -92,6 +98,43 @@ const config = convict({
       format: String,
       default: 'x-cdp-request-id',
       env: 'TRACING_HEADER'
+    }
+  },
+  fdm: {
+    endpoint: {
+      doc: 'FDM REST API endpoint',
+      format: String,
+      default: null,
+      env: 'FDM_ENDPOINT'
+    }
+  },
+  auth: {
+    enabled: {
+      doc: 'Whether Entra authentication is required for downstream Farming Data Model API',
+      format: Boolean,
+      default: true,
+      env: 'AUTH_ENABLED'
+    },
+    tenant: {
+      doc: 'Azure tenant ID to authenticate clients',
+      format: String,
+      default: null,
+      nullable: true,
+      env: 'TENANT_ID'
+    },
+    clientId: {
+      doc: 'Azure AD Client ID',
+      format: String,
+      default: null,
+      nullable: true,
+      env: 'CLIENT_ID'
+    },
+    clientSecret: {
+      doc: 'Azure AD Client Secret',
+      format: String,
+      default: null,
+      nullable: true,
+      env: 'CLIENT_SECRET'
     }
   }
 })
