@@ -68,6 +68,4 @@ enum MessageStatus {
 input MessageFilters {
   crn: BigInt
   sbi: Int
-  includeContent: Boolean
-  includeEvents: Boolean
 }
