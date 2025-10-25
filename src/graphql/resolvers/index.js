@@ -4,7 +4,7 @@ import { messageResolvers } from './message.js'
 const BigIntType = new GraphQLScalarType({
   name: 'BigInt',
   description: 'BigInt custom scalar type',
-  serialize(value) {
+  serialize (value) {
     // Handle null/undefined values
     if (value === null || value === undefined) {
       return null
@@ -12,7 +12,7 @@ const BigIntType = new GraphQLScalarType({
     // Convert to string for JSON serialization
     return String(value)
   },
-  parseValue(value) {
+  parseValue (value) {
     // Handle null/undefined values
     if (value === null || value === undefined) {
       return null
@@ -24,7 +24,7 @@ const BigIntType = new GraphQLScalarType({
       throw new GraphQLError(`Invalid BigInt value: ${value}`)
     }
   },
-  parseLiteral(ast) {
+  parseLiteral (ast) {
     // Handle null values
     if (ast.value === null) {
       return null
