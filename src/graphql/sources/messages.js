@@ -25,14 +25,18 @@ export async function getMessages (filters = {}) {
   return await get(path)
 }
 
-export async function getMessageByCorrelationId (correlationId, includeContent = false, includeEvents = false) {
+export async function getMessageByCorrelationId (correlationId, filters = {}) {
+  if (!correlationId) {
+    throw new Error('correlationId is required')
+  }
+
   const queryParams = new URLSearchParams()
 
-  if (includeContent) {
+  if (filters.includeContent) {
     queryParams.append('includeContent', 'true')
   }
 
-  if (includeEvents) {
+  if (filters.includeEvents) {
     queryParams.append('includeEvents', 'true')
   }
 
