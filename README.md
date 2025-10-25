@@ -65,13 +65,10 @@ When running locally, Apollo explorer can be used to explore and test the GraphQ
 
 #### Messages
 
-## Message Schema Examples
+##### Example 1: Fetching a Message by Correlation ID
 
-### Example 1: Fetching a Message by Correlation ID
-
-#### GraphQL Query
 ```graphql
-query GetMessage($correlationId: String!) {
+query Message($correlationId: String!) {
   message(correlationId: $correlationId) {
     correlationId
     created
@@ -88,29 +85,26 @@ query GetMessage($correlationId: String!) {
 }
 ```
 
-#### Variables
+##### Variables
 ```json
 {
   "correlationId": "79389915-7275-457a-b8ca-8bf206b2e67b"
 }
 ```
 
-#### cURL Command
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{
-    "query": "query GetMessage($correlationId: $correlationId) { message(correlationId: $correlationId) { correlationId created crn events { id source type time } lastUpdated status } }",
-    "variables": { "correlationId": "79389915-7275-457a-b8ca-8bf206b2e67b" }
+    "query": "query { message(correlationId: \"79389915-7275-457a-b8ca-8bf206b2e67b\") { correlationId created crn events { id source type time } lastUpdated status } }"
   }' \
   http://localhost:3001/graphql
 ```
 
-### Example 2: Fetching All Messages with Filters
+##### Example 2: Fetching All Messages with Filters
 
-#### GraphQL Query
 ```graphql
-query GetMessages($filters: MessageFilters) {
+query Messages($filters: MessageFilters) {
   messages(filters: $filters) {
     correlationId
     created
@@ -120,7 +114,8 @@ query GetMessages($filters: MessageFilters) {
 }
 ```
 
-#### Variables
+###### Variables
+
 ```json
 {
   "filters": {
@@ -130,13 +125,12 @@ query GetMessages($filters: MessageFilters) {
 }
 ```
 
-#### cURL Command
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{
-    "query": "query GetMessages($filters: $filters) { messages(filters: $filters) { correlationId created crn status } }",
-    "variables": { "filters": { "crn": 1234567890, "sbi": 987654321 } }
+    "query": "query Messages($filters: MessageFilters!) { messages(filters: $filters) { correlationId created crn status } }",
+    "variables": { "filters": { "crn": 1234567890, "sbi": 123456789 } }
   }' \
   http://localhost:3001/graphql
 ```
