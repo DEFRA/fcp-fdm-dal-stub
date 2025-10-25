@@ -3,7 +3,6 @@ import Joi from 'joi'
 
 import { config } from './config.js'
 import { router } from './plugins/router.js'
-import { swagger } from './plugins/swagger.js'
 import { requestLogger } from './common/helpers/logging/request-logger.js'
 import { failAction } from './common/helpers/fail-action.js'
 import { secureContext } from './common/helpers/secure-context/index.js'
@@ -50,7 +49,6 @@ async function createServer () {
     requestTracing,
     secureContext,
     pulse,
-    ...swagger,
     router,
     apollo
   ])
