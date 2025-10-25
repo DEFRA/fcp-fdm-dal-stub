@@ -9,7 +9,9 @@ function findRequestedFields (selectionSet) {
     if (sel.kind === 'Field') {
       fields.add(sel.name.value)
       if (sel.selectionSet) {
-        findRequestedFields(sel.selectionSet).forEach(fields.add, fields)
+        for (const field of findRequestedFields(sel.selectionSet)) {
+          fields.add(field)
+        }
       }
     }
     return fields
