@@ -54,7 +54,14 @@ describe('health routes', () => {
   })
 
   test('GET /graphql should return all messages', async () => {
-    const mockPayload = { data: { messages: [mockMessage] } }
+    const mockPayload = {
+      data: {
+        messages: [mockMessage]
+      },
+      links: { self: '/messages?page=1', next: null, prev: null },
+      meta: { page: 1, pageSize: 10, pages: 1, total: 1 }
+    }
+
     Wreck.get.mockResolvedValue({ payload: mockPayload })
 
     const options = {
@@ -68,7 +75,20 @@ describe('health routes', () => {
         query: `
           query Messages {
             messages {
-              correlationId
+              messages {
+                correlationId
+              }
+              links {
+                self
+                next
+                prev
+              }
+              meta {
+                page
+                pageSize
+                pages
+                total
+              }
             }
           }
         `
@@ -76,6 +96,14 @@ describe('health routes', () => {
     }
     const response = await server.inject(options)
     expect(response.statusCode).toBe(HTTP_STATUS_OK)
-    expect(JSON.parse(response.payload)).toEqual(mockPayload)
+    expect(JSON.parse(response.payload)).toEqual({
+      data: {
+        messages: {
+          messages: [mockMessage],
+          links: { self: '/messages?page=1', next: null, prev: null },
+          meta: { page: 1, pageSize: 10, pages: 1, total: 1 }
+        }
+      }
+    })
   })
 })

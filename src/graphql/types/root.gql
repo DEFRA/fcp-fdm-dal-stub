@@ -1,9 +1,9 @@
+scalar BigInt
+
 type Query {
-  # Get all messages with optional filtering
-  messages(filters: MessageFilters): [Message!]
+  # Get all messages with optional filtering and pagination
+  messages(filters: MessageFilters): PaginatedMessages!
 
   # Get a specific message by correlation ID
-  message(correlationId: String!): Message!
+  message(correlationId: String!): Message
 }
-
-scalar BigInt

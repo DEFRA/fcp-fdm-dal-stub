@@ -19,6 +19,14 @@ export async function getMessages (filters = {}) {
     queryParams.append('includeEvents', 'true')
   }
 
+  if (filters.page) {
+    queryParams.append('page', filters.page.toString())
+  }
+
+  if (filters.pageSize) {
+    queryParams.append('pageSize', filters.pageSize.toString())
+  }
+
   const queryString = queryParams.toString()
   const basePath = '/messages'
   const path = queryString ? `${basePath}?${queryString}` : basePath

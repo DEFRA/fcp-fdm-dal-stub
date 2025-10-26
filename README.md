@@ -103,39 +103,109 @@ curl -X POST \
 
 ##### Example 2: Fetching All Messages with Filters
 
+#### GraphQL Query
 ```graphql
-query Messages($filters: MessageFilters) {
+query GetMessages($filters: MessageFilters) {
   messages(filters: $filters) {
-    correlationId
-    created
-    crn
-    status
+    messages {
+      correlationId
+      crn
+      sbi
+      status
+      created
+      lastUpdated
+    }
+    links {
+      self
+      next
+      prev
+    }
+    meta {
+      page
+      pageSize
+      pages
+      total
+    }
   }
 }
 ```
 
-###### Variables
-
+#### Variables
 ```json
 {
   "filters": {
     "crn": 1234567890,
-    "sbi": 987654321
+    "sbi": 987654321,
+    "page": 1,
+    "pageSize": 10
   }
 }
 ```
 
+#### cURL Command
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
+  -H "x-apollo-operation-name: GetMessages" \
   -d '{
-    "query": "query Messages($filters: MessageFilters!) { messages(filters: $filters) { correlationId created crn status } }",
-    "variables": { "filters": { "crn": 1234567890, "sbi": 123456789 } }
+    "query": "query GetMessages($filters: MessageFilters) { messages(filters: $filters) { messages { correlationId crn sbi status created lastUpdated } links { self next prev } meta { page pageSize pages total } } }",
+    "variables": { "filters": { "crn": 1234567890, "sbi": 987654321, "page": 1, "pageSize": 10 } }
   }' \
   http://localhost:3001/graphql
 ```
 
-> **Note**: Only `crn` and `sbi` are allowed as filters when fetching multiple messages.
+### Example 3: Fetching Paginated Messages
+
+#### GraphQL Query
+```graphql
+query GetMessages($filters: MessageFilters) {
+  messages(filters: $filters) {
+    messages {
+      correlationId
+      crn
+      sbi
+      status
+      created
+      lastUpdated
+    }
+    links {
+      self
+      next
+      prev
+    }
+    meta {
+      page
+      pageSize
+      pages
+      total
+    }
+  }
+}
+```
+
+#### Variables
+```json
+{
+  "filters": {
+    "crn": 1234567890,
+    "sbi": 987654321,
+    "page": 2,
+    "pageSize": 5
+  }
+}
+```
+
+#### cURL Command
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "x-apollo-operation-name: GetMessages" \
+  -d '{
+    "query": "query GetMessages($filters: MessageFilters) { messages(filters: $filters) { messages { correlationId crn sbi status created lastUpdated } links { self next prev } meta { page pageSize pages total } } }",
+    "variables": { "filters": { "crn": 1234567890, "sbi": 987654321, "page": 2, "pageSize": 5 } }
+  }' \
+  http://localhost:3001/graphql
+```
 
 ## Licence
 
