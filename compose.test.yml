@@ -1,6 +1,4 @@
 
-name: fcp-fdm-dal-stub-test
-
 services:
   fcp-fdm-dal-stub:
     build:
