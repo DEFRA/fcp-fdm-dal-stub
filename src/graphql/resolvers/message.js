@@ -20,12 +20,17 @@ function findRequestedFields (selectionSet) {
 
 export const messageResolvers = {
   Query: {
-    messages: async (_parent, { filters }, _context, info) => {
+    messages: async (parent, { filters = {} }, context, info) => {
       const fields = findRequestedFields(info.fieldNodes[0].selectionSet)
       const includeContent = fields.has('subject') || fields.has('body')
       const includeEvents = fields.has('events') && [...fields].some(f => f !== 'events')
-      const response = await getMessages({ ...filters, includeContent, includeEvents })
-      return response.data.messages
+      const { crn, sbi, page = 1, pageSize = 20 } = filters
+      const response = await getMessages({ crn, sbi, includeContent, includeEvents, page, pageSize })
+      return {
+        messages: response.data.messages,
+        links: response.links,
+        meta: response.meta
+      }
     },
 
     message: async (_parent, { correlationId }, _context, info) => {

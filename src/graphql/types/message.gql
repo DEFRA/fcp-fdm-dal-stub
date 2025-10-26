@@ -56,5 +56,30 @@ type EventContent {
 
 input MessageFilters {
   crn: BigInt
-  sbi: Int
+  sbi: BigInt
+  includeContent: Boolean
+  includeEvents: Boolean
+  page: Int = 1
+  pageSize: Int = 20
+}
+
+type PaginatedMessages {
+  messages: [Message!]!
+  links: PaginationLinks!
+  meta: PaginationMeta!
+}
+
+type PaginationLinks {
+  self: String!
+  next: String
+  prev: String
+  first: String
+  last: String
+}
+
+type PaginationMeta {
+  page: Int!
+  pageSize: Int!
+  pages: Int!
+  total: Int!
 }
