@@ -20,7 +20,7 @@ function findRequestedFields (selectionSet) {
 
 export const messageResolvers = {
   Query: {
-    messages: async (parent, { filters = {} }, context, info) => {
+    messages: async (_parent, { filters = {} }, _context, info) => {
       const fields = findRequestedFields(info.fieldNodes[0].selectionSet)
       const includeContent = fields.has('subject') || fields.has('body')
       const includeEvents = fields.has('events') && [...fields].some(f => f !== 'events')
