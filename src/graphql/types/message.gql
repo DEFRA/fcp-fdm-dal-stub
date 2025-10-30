@@ -80,6 +80,4 @@ type PaginationLinks {
 type PaginationMeta {
   page: Int!
   pageSize: Int!
-  pages: Int!
-  total: Int!
 }
