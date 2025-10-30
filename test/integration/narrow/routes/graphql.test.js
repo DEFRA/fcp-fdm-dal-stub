@@ -14,7 +14,7 @@ const { createServer } = await import('../../../../src/server.js')
 
 let server
 
-describe('health routes', () => {
+describe('graphql routes', () => {
   beforeEach(async () => {
     vi.resetAllMocks()
 
@@ -59,7 +59,7 @@ describe('health routes', () => {
         messages: [mockMessage]
       },
       links: { self: '/messages?page=1', next: null, prev: null },
-      meta: { page: 1, pageSize: 10, pages: 1, total: 1 }
+      meta: { page: 1, pageSize: 10 }
     }
 
     Wreck.get.mockResolvedValue({ payload: mockPayload })
@@ -86,8 +86,6 @@ describe('health routes', () => {
               meta {
                 page
                 pageSize
-                pages
-                total
               }
             }
           }
@@ -101,7 +99,7 @@ describe('health routes', () => {
         messages: {
           messages: [mockMessage],
           links: { self: '/messages?page=1', next: null, prev: null },
-          meta: { page: 1, pageSize: 10, pages: 1, total: 1 }
+          meta: { page: 1, pageSize: 10 }
         }
       }
     })
