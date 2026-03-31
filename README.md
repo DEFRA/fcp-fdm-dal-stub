@@ -5,7 +5,6 @@
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_fcp-fdm-dal-stub&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=DEFRA_fcp-fdm-dal-stub)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_fcp-fdm-dal-stub&metric=coverage)](https://sonarcloud.io/summary/new_code?id=DEFRA_fcp-fdm-dal-stub)
 [![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/DEFRA/fcp-fdm-dal-stub/blob/main/.github/dependabot.yml)
-[![Dependency Review](https://github.com/DEFRA/fcp-fdm-dal-stub/actions/workflows/check-pull-request.yml/badge.svg)](https://github.com/DEFRA/fcp-fdm-dal-stub/actions/workflows/check-pull-request.yml)
 
 # Data Access Layer (DAL) stub for Farming Data Model (FDM)
 
