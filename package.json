@@ -1,7 +1,7 @@
 {
   "name": "fcp-fdm-dal-stub",
   "version": "0.0.0",
-  "description": "FCP Data Access Layer stub to support development of Farming Data Model",
+  "description": "FCP Data Access Layer stub to support development of Farming Operation Data Store (FODS)",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
