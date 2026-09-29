@@ -102,7 +102,7 @@ const config = convict({
   },
   fdm: {
     endpoint: {
-      doc: 'FDM REST API endpoint',
+      doc: 'FODS REST API endpoint',
       format: String,
       default: null,
       env: 'FDM_ENDPOINT'
@@ -110,7 +110,7 @@ const config = convict({
   },
   auth: {
     enabled: {
-      doc: 'Whether Entra authentication is required for downstream Farming Data Model API',
+      doc: 'Whether Entra authentication is required for downstream Farming Operation Data Store API',
       format: Boolean,
       default: true,
       env: 'AUTH_ENABLED'

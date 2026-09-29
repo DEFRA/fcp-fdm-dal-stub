@@ -6,13 +6,15 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_fcp-fdm-dal-stub&metric=coverage)](https://sonarcloud.io/summary/new_code?id=DEFRA_fcp-fdm-dal-stub)
 [![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/DEFRA/fcp-fdm-dal-stub/blob/main/.github/dependabot.yml)
 
-# Data Access Layer (DAL) stub for Farming Data Model (FDM)
+# Data Access Layer (DAL) stub for Farming Operation Data Store (FODS)
 
-The Farming Data Model (FDM) service is a common component to support data exchange between Farming and Countryside Programme (FCP) services.
+> FODS was previously known as the Farming Data Model (FDM). Repository, service and infrastructure names still use `fdm` for CDP compatibility.
 
-FDM subscribes to events across the FCP ecosystem via an AWS SQS queue. These events are persisted and precompiled into a data model which can be queried via REST API endpoints.
+The Farming Operation Data Store (FODS) service is a common component to support data exchange between Farming and Countryside Programme (FCP) services.
 
-The Data Access Layer (DAL) is intended to be the primary consumer of the FDM service.  This stub is therefore intended to support development of the FDM service in isolation by simulating the behaviour of the DAL.
+FODS subscribes to events across the FCP ecosystem via an AWS SQS queue. These events are persisted and precompiled into a data model which can be queried via REST API endpoints.
+
+The Data Access Layer (DAL) is intended to be the primary consumer of the FODS service.  This stub is therefore intended to support development of the FODS service in isolation by simulating the behaviour of the DAL.
 
 ## Requirements
 
