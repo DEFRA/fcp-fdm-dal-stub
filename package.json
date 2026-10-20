@@ -28,7 +28,6 @@
   ],
   "license": "OGL-UK-3.0",
   "dependencies": {
-    "@apollo/datasource-rest": "6.4.1",
     "@apollo/server": "5.5.0",
     "@as-integrations/hapi": "2.0.2",
     "@defra/hapi-tracing": "1.22.0",
