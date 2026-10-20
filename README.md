@@ -58,6 +58,16 @@ Tests can also be run in watch mode to support Test Driven Development (TDD):
 npm run docker:test:watch
 ```
 
+### Outbound proxy
+
+In CDP, outbound traffic goes through a proxy using Node.js native proxy support. The following must be set via cdp-app-config, and config validation fails at startup if any are missing when `ENVIRONMENT` is set to anything other than `local`:
+
+| Variable | Value |
+|---|---|
+| `NODE_USE_ENV_PROXY` | `1` (Node.js ignores any other value) |
+| `HTTPS_PROXY` | `http://localhost:3128` |
+| `NO_PROXY` | Comma separated hosts that bypass the proxy |
+
 ## GraphQL API
 
 The DAL stub exposes a GraphQL API following similar principles to the actual DAL using Apollo Server.
