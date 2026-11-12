@@ -145,8 +145,8 @@ query GetMessages($filters: MessageFilters) {
 ```json
 {
   "filters": {
-    "crn": 1234567890,
-    "sbi": 987654321,
+    "crn": 9234567890,
+    "sbi": 887654321,
     "page": 1,
     "pageSize": 10
   }
@@ -160,7 +160,7 @@ curl -X POST \
   -H "x-apollo-operation-name: GetMessages" \
   -d '{
     "query": "query GetMessages($filters: MessageFilters) { messages(filters: $filters) { messages { correlationId crn sbi status created lastUpdated } links { self next prev } meta { page pageSize } } }",
-    "variables": { "filters": { "crn": 1234567890, "sbi": 987654321, "page": 1, "pageSize": 10 } }
+    "variables": { "filters": { "crn": 9234567890, "sbi": 887654321, "page": 1, "pageSize": 10 } }
   }' \
   http://localhost:3001/graphql
 ```
@@ -196,8 +196,8 @@ query GetMessages($filters: MessageFilters) {
 ```json
 {
   "filters": {
-    "crn": 1234567890,
-    "sbi": 987654321,
+    "crn": 9234567890,
+    "sbi": 887654321,
     "page": 2,
     "pageSize": 5
   }
@@ -211,7 +211,7 @@ curl -X POST \
   -H "x-apollo-operation-name: GetMessages" \
   -d '{
     "query": "query GetMessages($filters: MessageFilters) { messages(filters: $filters) { messages { correlationId crn sbi status created lastUpdated } links { self next prev } meta { page pageSize } } }",
-    "variables": { "filters": { "crn": 1234567890, "sbi": 987654321, "page": 2, "pageSize": 5 } }
+    "variables": { "filters": { "crn": 9234567890, "sbi": 887654321, "page": 2, "pageSize": 5 } }
   }' \
   http://localhost:3001/graphql
 ```
